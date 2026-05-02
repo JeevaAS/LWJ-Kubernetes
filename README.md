@@ -98,6 +98,23 @@ Create a Linux EC2 VM with minimum
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 ```
+Need to Install Docker 
+
+sudo apt-get update
+sudo apt-get install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+
+sudo usermod -aG docker $USER
+newgrp docker
+minikube kubectl -- get pods -A
+
+alias kubectl="minikube kubectl --
+echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
+source ~/.bashrc
+
+
+
 
 ### 2️⃣ Start your cluster
 

@@ -47,7 +47,7 @@ AmazonEventBridgeFullAccess
 
 ### 4️⃣ Create S3 Bucket 
 
-In order to store the state of your cluster, and the representation of your cluster, we need to create a dedicated S3 bucket for kops to use. This bucket will become the source of truth for our cluster configuration. In this guide we'll call this bucket ==**lwm-kubernetes-bucket**==, but you should add a custom prefix as bucket names need to be unique.
+In order to store the state of your cluster, and the representation of your cluster, we need to create a dedicated S3 bucket for kops to use. This bucket will become the source of truth for our cluster configuration. In this guide we'll call this bucket ==**LWJ-kubernetes-bucket**==, but you should add a custom prefix as bucket names need to be unique.
 
 ### 5️⃣ Prepare local environment 
 
@@ -220,13 +220,13 @@ spec:
     - containerPort: 80
 ```
 
-### 6️⃣ ReplicaSet: lwm-replica (5 Replicas)
+### 6️⃣ ReplicaSet: LWJ-replica (5 Replicas)
 
 ```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: lwm-replica
+  name: LWJ-replica
 spec:
   # modify replicas according to your case
   replicas: 5
@@ -243,13 +243,13 @@ spec:
         image: httpd
 ```
 
-### 7️⃣ DaemonSet: lwm-daemon
+### 7️⃣ DaemonSet: LWJ-daemon
 
 ```yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: lwm-daemon
+  name: LWJ-daemon
 spec:
   selector:
     matchLabels:
@@ -299,7 +299,7 @@ kubectl apply -f main.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment
+  name: LWJ-deployment
 spec:
   replicas: 5
   selector:
@@ -321,7 +321,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment-re
+  name: LWJ-deployment-re
 spec:
   strategy:
     type: Recreate
@@ -380,7 +380,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    youtube: lwm
+    youtube: LWJ
   ports:
     - port: 80
       targetPort: 8080
@@ -391,7 +391,7 @@ kind: Pod
 metadata:
   name: jenkins-pod
   labels:
-    youtube: lwm
+    youtube: LWJ
 spec:
   containers:
   - name: cont1
@@ -460,7 +460,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment
+  name: LWJ-deployment
 spec:
   replicas: 5
   selector:
@@ -482,7 +482,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment
+  name: LWJ-deployment
 spec:
   replicas: 5
   selector:
@@ -657,8 +657,8 @@ spec:
 #### 🔹 Step 5: Verify Access to S3 from Pod
 
 ```bash
-2025-06-01 00:00:00 lwm-terraform-bucket
-2025-06-01 00:00:00 lwm-kubernetes-bucket
+2025-06-01 00:00:00 LWJ-terraform-bucket
+2025-06-01 00:00:00 LWJ-kubernetes-bucket
 ```
 
 # 🚀 Kubernetes Part 5 – YAML Reference Guide
@@ -1555,7 +1555,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment-1
+  name: LWJ-deployment-1
 spec:
   replicas: 5
   selector:
@@ -1585,7 +1585,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lwm-deployment-2
+  name: LWJ-deployment-2
 spec:
   replicas: 5
   selector:
@@ -1740,7 +1740,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /LWM
+      - path: /LWJ
         pathType: Prefix
         backend:
           service:
@@ -1786,7 +1786,7 @@ spec:
       containers:
       - name: app-a
         image: hashicorp/http-echo
-        args: ["-text=Hello from App A LWM"]
+        args: ["-text=Hello from App A LWJ"]
         ports:
         - containerPort: 5678
 ---
@@ -1845,7 +1845,7 @@ spec:
       containers:
       - name: app-b
         image: hashicorp/http-echo
-        args: ["-text=Hello from App B LWM"]
+        args: ["-text=Hello from App B LWJ"]
         ports:
         - containerPort: 5678
 ---
@@ -2206,7 +2206,7 @@ Instead of routing traffic to internal pods or endpoints, it returns a CNAME (DN
 apiVersion: v1
 kind: Service
 metadata:
-  name: lwm-svc
+  name: LWJ-svc
 spec:
   type: ExternalName
   externalName: ec2-52-77-254-161.ap-southeast-1.compute.amazonaws.com

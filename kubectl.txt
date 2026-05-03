@@ -1,0 +1,52 @@
+AWS CLI Installation on Ubuntu
+--------------------------------
+
+# Update packages
+sudo apt-get update
+
+# Install unzip if not already installed
+sudo apt-get install unzip -y
+
+# Download the AWS CLI v2 installer
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+# Unzip the installer
+unzip awscliv2.zip
+
+# Run the installer
+sudo ./aws/install
+
+
+Custom Policy 
+--------------
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "eks:DescribeCluster"
+      ],
+      "Resource": "arn:aws:eks:ap-south-1:175865097048:cluster/browneks"
+    }
+  ]
+}
+
+# Update package list
+sudo apt-get update
+
+# Install curl if not already installed
+sudo apt-get install -y curl
+
+# Download the latest stable kubectl binary
+curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# Make it executable
+chmod +x kubectl
+
+# Move it to a directory in your PATH
+sudo mv kubectl /usr/local/bin/
+
+# Verify installation
+kubectl version --client

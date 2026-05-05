@@ -53,7 +53,3 @@ kubectl version --client
 
 kubectl get nodes
 kubectl get pods --all-namespaces
-
-Learned k8s
-
-Learned Docker

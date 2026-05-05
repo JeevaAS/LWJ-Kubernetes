@@ -50,3 +50,6 @@ sudo mv kubectl /usr/local/bin/
 
 # Verify installation
 kubectl version --client
+
+kubectl get nodes
+kubectl get pods --all-namespaces
